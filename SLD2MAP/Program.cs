@@ -7,7 +7,7 @@
 
 	public class Program
 	{
-		private const string filename = @"sample\sld.xml";
+		private const string filename = @"sample\geoss.sld";
 
 		private static void Main()
 		{
@@ -22,20 +22,21 @@
 				if (xmlNode.Name == "ColorMapEntry")
 				{
 					// Remove the # or the hex color e.g. #0080FF
-					string color = xmlNode.Attributes["color"].Value.Remove(0, 1);
+					string color = xmlNode.Attributes["color"].Value.Replace("#", "");
 					string classid = xmlNode.Attributes["quantity"].Value;
 					string classname = xmlNode.Attributes["label"].Value;
 
 					int r = Convert.ToInt32(color.Substring(0, 2), 16);
 					int g = Convert.ToInt32(color.Substring(2, 2), 16);
 					int b = Convert.ToInt32(color.Substring(4, 2), 16);
+
 					lines.Add(
 						string.Format(
 							"CLASS{0}  EXPRESSION ([pixel]=={1}){0}  NAME \"{2}\"{0}  STYLE{0}    COLOR {3} {4} {5}{0}  END{0}END{0}",
 							Environment.NewLine, classid, classname, r, g, b));
 				}
 			}
-			File.WriteAllLines(filename.Replace(".xml", "") + "2map.txt", lines);
+			File.WriteAllLines(filename + "2map.txt", lines);
 			Console.WriteLine("Done. press a key");
 			Console.ReadKey();
 		}

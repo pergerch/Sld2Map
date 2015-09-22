@@ -53,9 +53,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sample\sld.xml">
+    <None Include="sample\geoss.sld">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
